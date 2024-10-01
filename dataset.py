@@ -268,7 +268,7 @@ class single_shape_grid(torch.utils.data.Dataset):
     def __getitem__(self, index):
 
         if self.input_type=="sdf" or self.input_type=="udf":
-            if self.data_dir.split(".")[-1]=="sdf":
+            if self.data_dir.split(".")[-1]=="bin":
                 LOD_input = read_sdf_file_as_3d_array(self.data_dir)
             elif self.data_dir.split(".")[-1]=="hdf5":
                 grid_size = 64

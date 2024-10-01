@@ -491,6 +491,7 @@ elif is_testing:
 
 
 elif quick_testing:
+    print("\033[92mDoning Quick Testing.\033[00m")
     import cutils
 
 
@@ -519,6 +520,8 @@ elif quick_testing:
         for i, data in enumerate(dataloader_test, 0):
 
             gt_input_, gt_output_bool_mask_ = data
+            gt_input_ = gt_input_.contiguous()
+            gt_output_bool_mask_ = gt_output_bool_mask_.contiguous()
 
             gt_input = gt_input_.to(device)
             if FLAGS.method == "undc":

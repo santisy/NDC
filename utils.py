@@ -4,15 +4,17 @@ import h5py
 
 #read sdf files produced by SDFGen
 def read_sdf_file_as_3d_array(name):
-    fp = open(name, 'rb')
-    line = fp.readline().strip()
-    if not line.startswith(b'#sdf'):
-        raise IOError('Not a sdf file')
-    dims = list(map(int, fp.readline().strip().split(b' ')[1:]))
-    line = fp.readline()
-    data = np.frombuffer(fp.read(), dtype=np.float32)
-    data = data.reshape(dims)
-    fp.close()
+    #fp = open(name, 'rb')
+    #line = fp.readline().strip()
+    #if not line.startswith(b'#sdf'):
+    #    raise IOError('Not a sdf file')
+    #dims = list(map(int, fp.readline().strip().split(b' ')[1:]))
+    #line = fp.readline()
+    #data = np.frombuffer(fp.read(), dtype=np.float32)
+    #data = data.reshape(dims)
+    #fp.close()
+    data = np.fromfile(name, dtype=np.float32)[1:]
+    data = np.ascontiguousarray(data.reshape([256, 256, 256]).transpose([2, 0, 1])) 
     return data
 
 #a simplified reader for binvox files
